@@ -50,45 +50,16 @@ publishing {
             artifact tasks.shadowJar
             artifact tasks.sourcesJar
             artifact tasks.javadocJar
-
-            pom {
-                name = findProperty("name")
-                description = findProperty("description")
-                url = "https://github.com/your/repo"
-
-                licenses {
-                    license {
-                        name = 'Apache License 2.0'
-                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = "shawn"
-                        name = "Shawn"
-                    }
-                }
-
-                scm {
-                    url = "https://github.com/your/repo"
-                    connection = "scm:git:https://github.com/your/repo.git"
-                    developerConnection = "scm:git:ssh://git@github.com/your/repo.git"
-                }
-            }
         }
     }
 
     repositories {
         maven {
-            name = "OSSRH"
-            url = version.endsWith("SNAPSHOT")
-                    ? uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-                    : uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/shawndenggh/thingsboard-rest-client-adapter")
             credentials {
-                username = findProperty("ossrhUsername")
-                password = findProperty("ossrhPassword")
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
