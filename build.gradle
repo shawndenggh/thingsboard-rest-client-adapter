@@ -37,6 +37,7 @@ shadowJar {
     relocate 'com.google.common',      'org.shawn.shaded.guava'
     relocate 'javax.annotation',       'org.shawn.shaded.javax.annotation'
     relocate 'jakarta.annotation',     'org.shawn.shaded.jakarta.annotation'
+    relocate 'org.springframework',    'org.shawn.shaded.springframework'
 }
 
 jar.enabled = false
