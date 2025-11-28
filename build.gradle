@@ -32,7 +32,6 @@ shadowJar {
     relocate 'org.thingsboard',        'org.shawn.shaded.tb'
     relocate 'com.fasterxml.jackson',  'org.shawn.shaded.jackson'
     relocate 'org.apache.http',        'org.shawn.shaded.http'
-    relocate 'org.slf4j',              'org.shawn.shaded.slf4j'
     relocate 'org.bouncycastle',       'org.shawn.shaded.bouncycastle'
     relocate 'io.swagger',             'org.shawn.shaded.swagger'
     relocate 'com.google.common',      'org.shawn.shaded.guava'
@@ -59,7 +58,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/shawndenggh/thingsboard-rest-client-adapter")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
