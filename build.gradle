@@ -58,7 +58,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/shawndenggh/thingsboard-rest-client-adapter")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
                 password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
