@@ -1,0 +1,103 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+    id "com.gradleup.shadow" version "9.2.2"
+}
+
+group = findProperty("group")
+version = findProperty("version")
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(findProperty("javaVersion"))
+    targetCompatibility = JavaVersion.toVersion(findProperty("javaVersion"))
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://repo.thingsboard.io/artifactory/libs-release-public"
+    }
+}
+
+dependencies {
+    implementation 'org.thingsboard:rest-client:4.2.1'
+}
+
+shadowJar {
+    archiveClassifier.set('')
+
+    relocate 'org.thingsboard',        'org.shawn.shaded.tb'
+    relocate 'com.fasterxml.jackson',  'org.shawn.shaded.jackson'
+    relocate 'org.apache.http',        'org.shawn.shaded.http'
+    relocate 'org.slf4j',              'org.shawn.shaded.slf4j'
+    relocate 'org.bouncycastle',       'org.shawn.shaded.bouncycastle'
+    relocate 'io.swagger',             'org.shawn.shaded.swagger'
+    relocate 'com.google.common',      'org.shawn.shaded.guava'
+    relocate 'javax.annotation',       'org.shawn.shaded.javax.annotation'
+    relocate 'jakarta.annotation',     'org.shawn.shaded.jakarta.annotation'
+}
+
+jar.enabled = false
+tasks.build.dependsOn shadowJar
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact tasks.shadowJar
+            artifact tasks.sourcesJar
+            artifact tasks.javadocJar
+
+            pom {
+                name = findProperty("name")
+                description = findProperty("description")
+                url = "https://github.com/your/repo"
+
+                licenses {
+                    license {
+                        name = 'Apache License 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "shawn"
+                        name = "Shawn"
+                    }
+                }
+
+                scm {
+                    url = "https://github.com/your/repo"
+                    connection = "scm:git:https://github.com/your/repo.git"
+                    developerConnection = "scm:git:ssh://git@github.com/your/repo.git"
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = version.endsWith("SNAPSHOT")
+                    ? uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                    : uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+
+            credentials {
+                username = findProperty("ossrhUsername")
+                password = findProperty("ossrhPassword")
+            }
+        }
+    }
+}
+
+signing {
+    useInMemoryPgpKeys(
+            findProperty("signingKey"),
+            findProperty("signingPassword")
+    )
+    sign publishing.publications.mavenJava
+}
