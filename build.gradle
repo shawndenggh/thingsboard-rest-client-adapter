@@ -31,28 +31,36 @@ shadowJar {
 
     relocate 'org.thingsboard', 'org.shawn.shaded.tb'
 
-    relocate 'com.auth0', 'com.example.shaded.auth0'
-    relocate 'com.ethlo', 'com.example.shaded.ethlo'
-    relocate 'com.fasterxml.jackson', 'org.shawn.shaded.jackson'
-    relocate 'com.github.benmanes', 'com.example.shaded.caffeine'
-    relocate 'oshi', 'com.example.shaded.oshi'
-    relocate 'com.upokecenter', 'com.example.shaded.upokecenter'
-    relocate 'javax', 'org.shawn.shaded.javax'
-    relocate 'com.google', 'com.example.shaded.google'
-    relocate 'com.networknt', 'com.example.shaded.networknt'
-    relocate 'okio', 'com.example.shaded.okio'
-    relocate 'com.squareup', 'com.example.shaded.squareup'
-    relocate 'org.apache', 'org.shawn.shaded.apache'
-    relocate 'dev.langchain4j', 'org.shawn.shaded.langchain4j'
-    relocate 'io.micrometer', 'org.shawn.shaded.micrometer'
-    relocate 'io.swagger', 'org.shawn.shaded.swagger'
-    relocate 'jakarta', 'org.shawn.shaded.jakarta'
-    relocate 'com.sun', 'org.shawn.shaded.sun'
-    relocate 'net.objecthunter.exp4j', 'org.shawn.shaded.exp4j'
-    relocate 'org.bouncycastle', 'org.shawn.shaded.bouncycastle'
-    relocate 'org.checkerframework', 'org.shawn.shaded.checkerframework'
-    relocate 'org.eclipse', 'org.shawn.shaded.eclipse'
-    relocate 'org.springframework', 'org.shawn.shaded.springframework'
+//    relocate 'com.auth0', 'org.shawn.shaded.auth0'
+//    relocate 'com.ethlo', 'org.shawn.shaded.ethlo'
+//    relocate 'com.fasterxml.jackson', 'org.shawn.shaded.jackson'
+//    relocate 'com.github.benmanes', 'org.shawn.shaded.caffeine'
+//    relocate 'oshi', 'org.shawn.shaded.oshi'
+//    relocate 'com.upokecenter', 'org.shawn.shaded.upokecenter'
+//    relocate 'javax', 'org.shawn.shaded.javax'
+//    relocate 'com.google', 'org.shawn.shaded.google'
+//    relocate 'com.networknt', 'org.shawn.shaded.networknt'
+//    relocate 'okio', 'org.shawn.shaded.okio'
+//    relocate 'com.squareup', 'org.shawn.shaded.squareup'
+//    relocate 'org.apache', 'org.shawn.shaded.apache'
+//    relocate 'dev.langchain4j', 'org.shawn.shaded.langchain4j'
+//    relocate 'io.micrometer', 'org.shawn.shaded.micrometer'
+//    relocate 'io.swagger', 'org.shawn.shaded.swagger'
+//    relocate 'jakarta', 'org.shawn.shaded.jakarta'
+//    relocate 'com.sun', 'org.shawn.shaded.sun'
+//    relocate 'net.objecthunter.exp4j', 'org.shawn.shaded.exp4j'
+//    relocate 'org.bouncycastle', 'org.shawn.shaded.bouncycastle'
+//    relocate 'org.checkerframework', 'org.shawn.shaded.checkerframework'
+//    relocate 'org.eclipse', 'org.shawn.shaded.eclipse'
+//    relocate 'org.springframework', 'org.shawn.shaded.springframework'
+
+    relocate "org.springframework", "org.shawn.shaded.org.springframework"
+    relocate "com.fasterxml", "org.shawn.shaded.com.fasterxml"
+    relocate "org.apache", "org.shawn.shaded.org.apache"
+    relocate "com.google", "org.shawn.shaded.com.google"
+    relocate "okhttp3", "org.shawn.shaded.okhttp3"
+    relocate "okio", "org.shawn.shaded.okio"
+    relocate "jakarta", "org.shawn.shaded.jakarta"
 }
 
 jar.enabled = false
